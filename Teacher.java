@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class Teacher{
     ArrayList <String> userList = new ArrayList<String>();
     ArrayList <String> passList = new ArrayList<String>();
+
+    String firstName;
+    String lastName;
     
     // Login
     String username;
@@ -115,12 +118,66 @@ public class Teacher{
                 writer.write(data);
                 writer.write(System.lineSeparator());
             }
+            writer.write("Students:");
+            writer.write(System.lineSeparator());
             writer.close();
         } catch (IOException e) {
             System.out.println("Sorry, some error occured!");
         }
              
         return "Successfully Registered";
+    }
+
+    public void viewFile(String fname, String lname){
+        firstName = fname;
+        lastName = lname; 
+        try {
+            File userFile = new File(firstName+"-"+lastName+"-teacher.txt");
+            Scanner reader = new Scanner(userFile);
+            while(reader.hasNextLine()){
+                System.out.println(reader.nextLine());
+            }
+            reader.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry, file not found!");
+        }
+    }
+
+    public void addStudent (String fname, String lname){
+        try {
+            FileWriter writer = new FileWriter(firstName+"-"+lastName+"-teacher.txt",true);
+            writer.write(fname+", "+lname);
+            writer.write(System.lineSeparator());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Sorry, some error occured!");
+        }
+    }
+
+    public void viewStudent (String fname, String lname){
+        try {
+            File userFile = new File(fname+"-"+lname+"-student.txt");
+            Scanner reader = new Scanner(userFile);
+            while(reader.hasNextLine()){
+                System.out.println(reader.nextLine());
+            }
+            reader.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry, student has not created an account!");
+        }
+    }
+
+    public void addCourse (String fname, String lname, String course){
+        try {
+            FileWriter writer = new FileWriter(fname+"-"+lname+"-student.txt",true);
+            writer.write(course);
+            writer.write(System.lineSeparator());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Sorry, some error occured!");
+        }
     }
 
 

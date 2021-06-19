@@ -15,6 +15,9 @@ public class Student {
 
     // Register
     String[] newUser = {"","","",""};
+
+    String firstName;
+    String lastName;
    
     public Student(String user, String pass){
         username = user.toLowerCase();
@@ -115,6 +118,8 @@ public class Student {
                 writer.write(data);
                 writer.write(System.lineSeparator());
             }
+            writer.write("Courses:");
+            writer.write(System.lineSeparator());
             writer.close();
         } catch (IOException e) {
             System.out.println("Sorry, some error occured!");
@@ -123,6 +128,21 @@ public class Student {
         return "Successfully Registered";
     }
 
+    public void viewFile(String fname, String lname){
+        firstName = fname;
+        lastName = lname; 
+        try {
+            File userFile = new File(firstName+"-"+lastName+"-student.txt");
+            Scanner reader = new Scanner(userFile);
+            while(reader.hasNextLine()){
+                System.out.println(reader.nextLine());
+            }
+            reader.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry, file not found!");
+        }
+    }
 
 
     
